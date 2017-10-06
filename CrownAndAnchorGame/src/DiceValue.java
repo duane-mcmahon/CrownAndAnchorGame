@@ -1,11 +1,13 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PrimitiveIterator;
 import java.util.Random;
 
 public enum DiceValue {
 	CROWN, ANCHOR, HEART, DIAMOND, CLUB, SPADE;
 
-	private static Random RANDOM = new Random();
+	private static PrimitiveIterator.OfInt RANDOM =  new Random().ints(DiceValue.CROWN.ordinal(),
+			DiceValue.SPADE.ordinal() + 1).iterator();
 
 	private static final Map<DiceValue, String> VALUE_REPR_MAP = new HashMap<>();
 
@@ -23,7 +25,7 @@ public enum DiceValue {
 	}
 
 	public static DiceValue getRandom() {
-		int random = RANDOM.nextInt(DiceValue.SPADE.ordinal());
+		int random = RANDOM.nextInt();
 		return values()[random];
 	}
 
